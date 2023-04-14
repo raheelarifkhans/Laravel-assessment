@@ -13,6 +13,12 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * Defined const for gender.
+     */
+    const MALE = 1;
+    const FEMALE = 0;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -21,7 +27,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'date_of_birth',
+        'gender',
+        'location',
     ];
+
+    /**
+     * The attributes that should be append.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = ['age'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +57,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Defined age attribute as accessor for calculate age
+     */
+    public function getAgeAttribute()
+    {
+        return $this->date_of_birth ? \Carbon\Carbon::parse($this->date_of_birth)->age : null;
+    }
 }
