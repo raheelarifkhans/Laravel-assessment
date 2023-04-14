@@ -13,10 +13,17 @@ class UserRepository
         $this->userModel = $userModel;
     }
 
-    public function getAllUsers()
+    public function getAllUsers($filters)
     {
-        return $this->userModel->query()
-            ->with('languages')
-            ->get();
+        $query = $this->userModel->query()->with('languages');
+
+        // Apply age filter
+        if (isset($filters['age'])) {
+            $query->filterByAge($filters['age']);
+        }
+
+        // Add more filters as needed
+
+        return $query->get();
     }
 }
