@@ -16,7 +16,9 @@ class User extends Authenticatable
     use HasApiTokens,
         HasFactory,
         Notifiable,
-        AgeFilterTrait;
+        AgeFilterTrait,
+        GenderFilterTrait,
+        LocationFilterTrait;
 
     /**
      * Defined const for gender.

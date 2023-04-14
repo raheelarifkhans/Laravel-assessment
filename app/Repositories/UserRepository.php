@@ -22,6 +22,16 @@ class UserRepository
             $query->filterByAge($filters['age']);
         }
 
+        // Apply gender filter
+        if (isset($filters['gender'])) {
+            $query->filterByGender($filters['gender']);
+        }
+
+        // Apply location filter
+        if (isset($filters['location'])) {
+            $query->filterByLocation($filters['location']);
+        }
+
         // Add more filters as needed
 
         return $query->get();
