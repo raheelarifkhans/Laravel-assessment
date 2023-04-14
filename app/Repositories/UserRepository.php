@@ -15,8 +15,8 @@ class UserRepository
 
     public function getAllUsers()
     {
-        return $this->userModel
-            ->query()
+        return $this->userModel->query()
+            ->with('languages')
             ->get();
     }
 }

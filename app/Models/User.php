@@ -65,4 +65,10 @@ class User extends Authenticatable
     {
         return $this->date_of_birth ? \Carbon\Carbon::parse($this->date_of_birth)->age : null;
     }
+
+    // Define the many-to-many relationship with Language model
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class, 'user_languages', 'user_id', 'language_id');
+    }
 }
